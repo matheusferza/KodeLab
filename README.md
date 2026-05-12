@@ -40,7 +40,9 @@ O progresso fica salvo no `localStorage`.
 - Simulador JavaScript com `if/else`
 - Gerador de prompt de IA simulado
 - Área do aluno com progresso salvo localmente
+- Badges, checklist de portfólio e diário de estudo
 - Módulo de estudo para React, Vite e Node
+- Deploy automatizado para GitHub Pages via GitHub Actions
 
 ## Stack
 
@@ -56,17 +58,25 @@ O progresso fica salvo no `localStorage`.
 npm run dev
 npm run build
 npm run preview
+npm run check
 ```
 
 ## Estrutura
 
 ```text
+.github/workflows/
+  deploy.yml
 src/
   main.jsx
   styles.css
 public/
   favicon.svg
+vite.config.js
 ```
+
+## Deploy
+
+O projeto está configurado para GitHub Pages com base `/KodeLab/`. A cada push na branch `main`, o workflow `Deploy KodeLab` instala dependências, gera o build e publica a pasta `dist`.
 
 ## Próximos passos
 

@@ -319,7 +319,10 @@ p {
 
 .path-grid,
 .module-grid,
-.student-grid {
+.student-grid,
+.checkpoint-grid,
+.glossary-grid,
+.student-dashboard {
   display: grid;
   gap: 16px;
 }
@@ -336,9 +339,20 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.checkpoint-grid,
+.student-dashboard {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.glossary-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .path-card,
 .module-card,
-.student-card {
+.student-card,
+.checkpoint-card,
+.glossary-grid article {
   padding: 18px;
 }
 
@@ -366,10 +380,25 @@ p {
 
 .module-card p,
 .student-card p,
+.checkpoint-card li,
+.glossary-grid p,
 .control-panel p,
 .challenge-box p,
 .quiz-box p {
   color: var(--muted);
+}
+
+.checkpoint-card,
+.glossary-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(20, 33, 43, 0.06);
+}
+
+.checkpoint-card ul {
+  margin: 0;
+  padding-left: 20px;
 }
 
 .lesson-layout,
@@ -719,6 +748,53 @@ textarea {
   font-size: 64px;
 }
 
+.student-dashboard {
+  margin-top: 18px;
+}
+
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 10px;
+  color: var(--muted);
+  background: #eef4f6;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.badge.active {
+  color: #0c6f72;
+  background: var(--green);
+  border-color: rgba(15, 139, 141, 0.35);
+}
+
+.checklist {
+  display: grid;
+  gap: 10px;
+}
+
+.checklist label {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.notes-card {
+  grid-column: span 1;
+}
+
+.notes-card textarea {
+  min-height: 250px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -763,6 +839,9 @@ textarea {
   .path-grid,
   .module-grid,
   .student-grid,
+  .checkpoint-grid,
+  .glossary-grid,
+  .student-dashboard,
   .stack-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -798,6 +877,9 @@ textarea {
   .path-grid,
   .module-grid,
   .student-grid,
+  .checkpoint-grid,
+  .glossary-grid,
+  .student-dashboard,
   .option-grid,
   .stack-grid {
     grid-template-columns: 1fr;

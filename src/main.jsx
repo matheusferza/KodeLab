@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -47,6 +47,45 @@ const studyPath = [
   "Interação",
   "Desafio",
   "Feedback",
+];
+
+const checkpoints = [
+  {
+    title: "Fundamentos da Web",
+    items: ["HTML semântico", "CSS visual", "JavaScript com eventos", "IA como apoio"],
+  },
+  {
+    title: "Laboratórios",
+    items: ["Editor HTML", "Playground CSS", "Simulador JS", "Gerador de prompts"],
+  },
+  {
+    title: "Stack Moderna",
+    items: ["React por componentes", "Vite para desenvolvimento", "Node e npm", "Build de produção"],
+  },
+];
+
+const glossary = [
+  ["Componente", "Parte reutilizável da interface, como botão, card, laboratório ou menu."],
+  ["Estado", "Informação que muda a tela, como progresso, idade ou respostas do aluno."],
+  ["Build", "Versão otimizada do projeto para publicação."],
+  ["LocalStorage", "Memória do navegador usada para salvar progresso sem banco de dados."],
+];
+
+const portfolioChecklist = [
+  "Publicar o projeto no GitHub",
+  "Explicar o objetivo no README",
+  "Mostrar a stack usada",
+  "Documentar funcionalidades do MVP",
+  "Registrar próximos passos",
+  "Validar o build antes da entrega",
+];
+
+const badges = [
+  ["site", "Fundamentos Web"],
+  ["html", "HTML Builder"],
+  ["css", "CSS Designer"],
+  ["js", "JS Logic"],
+  ["stack", "Stack Moderna"],
 ];
 
 const quiz = [
@@ -194,6 +233,38 @@ function Campus({ setView, progress }) {
           <h2>Áreas de estudo</h2>
         </div>
         <ModuleGrid setView={setView} />
+      </section>
+
+      <section className="section">
+        <div className="section-title">
+          <p className="eyebrow">Matriz do MVP</p>
+          <h2>O que o projeto já cobre</h2>
+        </div>
+        <div className="checkpoint-grid">
+          {checkpoints.map((group) => (
+            <article key={group.title} className="checkpoint-card">
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section soft">
+        <div className="section-title">
+          <p className="eyebrow">Glossário técnico</p>
+          <h2>Conceitos que o aluno encontra no projeto</h2>
+        </div>
+        <div className="glossary-grid">
+          {glossary.map(([term, definition]) => (
+            <article key={term}>
+              <h3>{term}</h3>
+              <p>{definition}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   );
@@ -561,6 +632,10 @@ function LivePreview({ html }) {
 }
 
 function Student({ progress, completed }) {
+  const [notes, setNotes] = useStoredState("kodelab-study-notes", "");
+  const [checklist, setChecklist] = useStoredState("kodelab-portfolio-checklist", {});
+  const checklistDone = portfolioChecklist.filter((item) => checklist[item]).length;
+
   return (
     <div className="page-wrap">
       <header className="page-header compact">
@@ -575,6 +650,7 @@ function Student({ progress, completed }) {
           <span>Progresso total</span>
           <strong>{progress}%</strong>
           <div className="progress-track large"><i style={{ width: `${progress}%` }} /></div>
+          <p>{Object.keys(completed).length} de {modules.length} módulos concluídos.</p>
         </article>
         {modules.map((module) => (
           <article key={module.id} className="student-card">
@@ -583,6 +659,48 @@ function Student({ progress, completed }) {
             <p>{completed[module.id] ? "Concluído" : "Em andamento"}</p>
           </article>
         ))}
+      </section>
+
+      <section className="student-dashboard">
+        <article className="student-card">
+          <span>Badges</span>
+          <h2>Conquistas</h2>
+          <div className="badge-grid">
+            {badges.map(([id, label]) => (
+              <div key={id} className={completed[id] ? "badge active" : "badge"}>
+                {label}
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <article className="student-card">
+          <span>Entrega</span>
+          <h2>Checklist de portfólio</h2>
+          <p>{checklistDone} de {portfolioChecklist.length} itens prontos.</p>
+          <div className="checklist">
+            {portfolioChecklist.map((item) => (
+              <label key={item}>
+                <input
+                  type="checkbox"
+                  checked={Boolean(checklist[item])}
+                  onChange={(event) => setChecklist({ ...checklist, [item]: event.target.checked })}
+                />
+                {item}
+              </label>
+            ))}
+          </div>
+        </article>
+
+        <article className="student-card notes-card">
+          <span>Anotações</span>
+          <h2>Diário de estudo</h2>
+          <textarea
+            value={notes}
+            onChange={(event) => setNotes(event.target.value)}
+            placeholder="Registre dúvidas, ideias de melhoria, links e aprendizados..."
+          />
+        </article>
       </section>
     </div>
   );
