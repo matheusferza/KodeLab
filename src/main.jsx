@@ -158,7 +158,7 @@ function Sidebar({ view, setView, progress, completed }) {
   return (
     <aside className="sidebar">
       <button className="brand" onClick={() => setView("campus")}>
-        <span>CL</span>
+        <span>KL</span>
         <div>
           <strong>KodeLab</strong>
           <small>Aprenda, teste e interaja</small>
