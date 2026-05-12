@@ -2,6 +2,12 @@
 
 KodeLab é uma plataforma de estudos interativa para aprender programação de forma visual e prática. A proposta é transformar conteúdo teórico em experiências de aula, laboratórios manipuláveis, desafios e feedback em tempo real.
 
+## Sobre o projeto
+
+O KodeLab nasceu como um projeto educacional para tornar o estudo de programação mais dinâmico, visual e acessível. A ideia é substituir a experiência passiva de apenas ler materiais por uma jornada em que o aluno aprende, testa, modifica atributos e enxerga o resultado imediatamente na tela.
+
+A plataforma foi pensada com uma proposta institucional, como um ambiente de faculdade de tecnologia: há um campus digital, trilhas de estudo, laboratórios práticos, área do aluno e acompanhamento de progresso. O objetivo é ajudar iniciantes a entenderem, na prática, como HTML, CSS, JavaScript, IA e ferramentas modernas como React, Vite e Node trabalham juntas na criação de aplicações web.
+
 ## Visão
 
 Em vez de estudar apenas por PDFs ou apostilas estáticas, o aluno segue um fluxo guiado:
